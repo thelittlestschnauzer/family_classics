@@ -1,3 +1,23 @@
 body {
-    margin: 0;
+    margin-top: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: #424244;
+}
+
+.navbar {
+    margin: 10px;
+    border-bottom: 1px solid #C5C4C6;
+    text-transform: uppercase;
+    .navbar-item {
+        color: #424244;
+        &:hover {
+            color: #C5C4C6;
+        }
+    }
+}
+
+.active-button {
+    color: #FFF;
+    background-color: #81A190;
 }
