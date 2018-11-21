@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  root to: 'home#index'
+  
+  resources :recipes do 
+    resources :ingredients
+  end
+  
+  root to: 'recipes#index'
 
   devise_scope :user do
     get 'login', to: 'devise/sessions#new'

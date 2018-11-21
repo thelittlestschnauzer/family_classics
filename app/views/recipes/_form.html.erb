@@ -1,0 +1,22 @@
+<%= form_for @recipe do |f| %>
+  <div id="error_explanation">
+  <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe to save: </h2>
+    <ul>
+    <% @recipe.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+
+  <div class="field">
+    <%= f.label :title_of_recipe, class: "label" %>
+    <%= f.text_field :title, class: "input" %>
+  </div>
+  <div class="field">
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="field">
+    <%= f.submit class: "button active-button" %>
+  </div>
+<% end %>
