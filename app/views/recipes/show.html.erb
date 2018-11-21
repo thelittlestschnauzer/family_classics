@@ -5,4 +5,14 @@
       </div>
     <%= image_tag @recipe.image %>
   </div>
+  <% @recipe.ingredients.recipe_details.each do |recipe_detail| %>
+    <%= recipe_detail.level %> |
+    <%= recipe_detail.serves %>
+    <%= recipe_detail.quantity %> -
+<% end %>
+  <% @recipe.ingredients.each do |ingredient| %>
+  <div class="container">
+    <%= ingredient.name %> 
+  </div>
+  <% end %>
 </section>

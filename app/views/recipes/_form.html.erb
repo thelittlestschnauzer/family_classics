@@ -16,6 +16,20 @@
     <%= f.file_field :image %>
   </div>
 
+  <%= f.fields_for :ingredients do |i| %>
+  <div class="field">
+    <%= i.label :name_of_ingredient %>:
+    <%= i.text_field :name, class: "input" %><br/>
+    <%= i.fields_for :recipe_details do |r| %>
+      <%= r.label :serves, class: "label" %>
+      <%= r.text_field :serves, class: "input" %>
+      <%= r.label :level, class: "label" %>
+      <%= r.text_field :level, class: "input" %>
+      <%= r.label :quantity, class: "label" %>
+      <%= r.text_field :quantity, class: "input" %><br/>
+    <% end %>
+  <% end %>
+  <br/>
   <div class="field">
     <%= f.submit class: "button active-button" %>
   </div>
