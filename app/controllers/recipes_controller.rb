@@ -8,12 +8,15 @@ class RecipesController < ApplicationController
 
     def create 
       @recipe = Recipe.create(recipe_params)
-      @recipe.image.attach(params[:recipe][:image])
       if @recipe.save 
-        redirect_to @recipe 
+        redirect_to @recipe
       else
         render :new 
       end 
+    end 
+
+    def index 
+      @recipes = Recipe.with_attached_image
     end 
 
     def show 
@@ -22,7 +25,7 @@ class RecipesController < ApplicationController
     private 
 
     def recipe_params 
-      params.require(:recipe).permit(:title, ingredients_attributes: [:name, recipe_details: [:serves, :quantity, :level]])
+      params.require(:recipe).permit(:title, :image, ingredients_attributes: [:name, recipe_details: [:serves, :quantity, :level]])
     end 
 
     def set_recipe 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_21_161608) do
+ActiveRecord::Schema.define(version: 2018_11_23_022201) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -54,6 +54,10 @@ ActiveRecord::Schema.define(version: 2018_11_21_161608) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "card_image_file_name"
+    t.string "card_image_content_type"
+    t.bigint "card_image_file_size"
+    t.datetime "card_image_updated_at"
   end
 
   create_table "users", force: :cascade do |t|

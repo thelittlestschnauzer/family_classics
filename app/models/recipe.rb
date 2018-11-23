@@ -1,5 +1,6 @@
 class Recipe < ApplicationRecord
-  has_one_attached :image 
+  has_one_attached :image
+  validate :image_type
 
   has_many :recipe_details 
   has_many :ingredients, through: :recipe_details
@@ -7,6 +8,22 @@ class Recipe < ApplicationRecord
   validates :title, presence: true
   validates :title, uniqueness: true 
   validates_associated :ingredients
+  
+  def thumbnail 
+    return self.image.variant(resize: '249x249!').processed
+  end 
+
+  def large 
+    return self.image.variant(resize: '1000x500!').processed
+  end 
+
+  private 
+
+  def image_type
+    if image.attached? == false 
+      errors.add(:image, "is missing")
+    end  
+  end 
 
   def ingredients_attributes=(ingredients_attributes) 
     ingredients_attributes.values.each do |ingredients_attribute|
