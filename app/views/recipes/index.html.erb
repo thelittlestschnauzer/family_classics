@@ -1,15 +1,11 @@
-  <div class="columns is multiline">
+  <div class="columns is-multiline">
     <% @recipes.each do |recipe| %>
-      <div class="column is-one-third">
-          <div class="card">
-              <%= image_tag recipe.image %>
-            <div class="content">
-              The Beast stumbled in the dark for it could no longer see the path. It started to fracture and weaken, trying to reshape itself into the form of metal. Even the witches would no longer lay eyes upon it, for it had become hideous and twisted.
-              <div class="background-icon"><span class="icon-twitter"></span></div>
-            </div>
-          </div>
+      <div class="column is-3 card index-card">
+      <%= image_tag recipe.image %>
+        <div class="content recipe_title">
+          <%= link_to recipe.title, recipe_path(recipe) %>
+        </div>
       </div>
-    
     <% end %>
   </div>
  

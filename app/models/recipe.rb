@@ -10,7 +10,7 @@ class Recipe < ApplicationRecord
   validates_associated :ingredients
   
   def thumbnail 
-    return self.image.variant(resize: '249x249!').processed
+    return self.image.variant(resize: '350x350!').processed
   end 
 
   def large 
