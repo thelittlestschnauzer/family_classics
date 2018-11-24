@@ -23,13 +23,15 @@
     <%= f.text_field :serves, class: "input" %>
   </div>
 
-  <%= f.fields_for :ingredients do |i| %>
-  <div class="field">
-    <%= i.label :name_of_ingredient %>:
-    <%= i.text_field :name, class: "input" %><br/>
-    <%= i.fields_for :recipe_details do |r| %>
-      <%= r.label :quantity, class: "label" %>
-      <%= r.text_field :quantity, class: "input" %><br/>
+  <%= f.fields_for :ingredients do |ingredient| %>
+    <%= render 'ingredient_fields', f: ingredient %>
+  <div class="links">
+    <%= link_to_add_association 'add ingredient', f, :ingredients, class: "button" %>
+  </div>
+  
+    <%= ingredient.fields_for :recipe_details do |recipe_detail| %>
+      <%= recipe_detail.label :quantity, class: "label" %>
+      <%= recipe_detail.text_field :quantity, class: "input" %><br/>
     <% end %>
   <% end %>
   <br/>
