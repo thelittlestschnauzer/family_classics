@@ -19,6 +19,15 @@ class Recipe < ApplicationRecord
     return self.image.variant(resize: '1000x500!').processed
   end 
 
+  def ingredients_attributes=(ingredients_attributes) 
+    ingredients_attributes.values.each do |ingredients_attribute| 
+      if !ingredients_attribute["name"].empty?
+        ingredient = Ingredient.find_or_create_by(name: ingredients_attribute["name"])
+        self.recipe_details.build(recipe: self, ingredient: ingredient, quantity: ingredients_attribute["recipe_details"]["quantity"])
+      end      
+    end 
+  end  
+
   private 
 
   def image_type
@@ -27,12 +36,4 @@ class Recipe < ApplicationRecord
     end  
   end 
 
-  def ingredients_attributes=(ingredients_attributes) 
-    ingredients_attributes.values.each do |ingredients_attribute|
-      if !ingredients_attribute["name"].empty?
-        ingredient = Ingredient.find_or_create_by(name: ingredients_attribute["name"])
-        self.recipe_details.build(recipe: self, ingredient: ingredient, quantity: ingredients_attribute["recipe_details"]["quantity"]) 
-      end 
-    end 
-  end  
 end
