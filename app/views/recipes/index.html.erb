@@ -4,10 +4,10 @@
   <div class="container">
     <div class="columns is-multiline">
         <% @recipes.each do |recipe| %>
-        <div class="column is-2 card index-card">
-        <%= image_tag recipe.image %>
+        <div class="column is-3 card index-card">
+        <%= image_tag recipe.thumbnail %>
             <div class="content recipe_title">
-            <%= link_to recipe.title, recipe_path(recipe) %>
+              <%= link_to recipe.title, recipe_path(recipe) %>
             </div>
         </div>
         <% end %>
