@@ -1,13 +1,16 @@
 <section class="section">
   <div class="container">
     <h3 class="subtitle recipe-title"><%= @recipe.title %></h3>
-      <p><%= @recipe.level %> | Serves: <%= @recipe.serves %></p>
+      <p class="recipe-info"><%= @recipe.level %> | Serves: <%= @recipe.serves %></p>
+  </div>
+  <div class="container image-container">
         <%= image_tag(@recipe.large) %>
   </div>
   <div class="container">  
+    <h4 class="subtitle ingredients-title">Ingredients:</h4> 
       <ul>
         <% @recipe.recipe_details.each do |recipe_detail| %>
-          <li> 
+          <li class="list-ingredients"> 
             <%= recipe_detail.quantity %> | 
             <%= recipe_detail.ingredient.name %>
           </li>
