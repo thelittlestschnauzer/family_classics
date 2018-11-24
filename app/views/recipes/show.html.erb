@@ -1,6 +1,18 @@
-<section class="section ">
+<section class="section">
   <div class="container">
-        <h3 class="subtitle recipe-title"><%= @recipe.title %></h3>
+    <h3 class="subtitle recipe-title"><%= @recipe.title %></h3>
+      <p><%= @recipe.level %> | Serves: <%= @recipe.serves %></p>
         <%= image_tag(@recipe.large) %>
+  </div>
+  <div class="container">  
+      <ul>
+        <% @recipe.recipe_details.each do |recipe_detail| %>
+          <li> 
+            <%= recipe_detail.quantity %> | 
+            <%= recipe_detail.ingredient.name %>
+          </li>
+        <% end %>
+      </ul>
+      <p><%= link_to "Edit", edit_recipe_path(@recipe) %></p>
   </div>
 </section>

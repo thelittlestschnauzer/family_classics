@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_23_022201) do
+ActiveRecord::Schema.define(version: 2018_11_24_013805) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,12 @@ ActiveRecord::Schema.define(version: 2018_11_23_022201) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -42,8 +48,6 @@ ActiveRecord::Schema.define(version: 2018_11_23_022201) do
   create_table "recipe_details", force: :cascade do |t|
     t.integer "recipe_id"
     t.integer "ingredient_id"
-    t.string "level"
-    t.integer "serves"
     t.string "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -58,6 +62,9 @@ ActiveRecord::Schema.define(version: 2018_11_23_022201) do
     t.string "card_image_content_type"
     t.bigint "card_image_file_size"
     t.datetime "card_image_updated_at"
+    t.string "level"
+    t.string "serves"
+    t.integer "category_id"
   end
 
   create_table "users", force: :cascade do |t|

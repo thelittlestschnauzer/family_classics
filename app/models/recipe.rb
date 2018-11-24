@@ -1,6 +1,8 @@
 class Recipe < ApplicationRecord
   has_one_attached :image
   validate :image_type
+  
+  belongs_to :category, optional: true
 
   has_many :recipe_details 
   has_many :ingredients, through: :recipe_details

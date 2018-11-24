@@ -4,6 +4,7 @@ class RecipesController < ApplicationController
     def new 
       @recipe = Recipe.new 
       @recipe.ingredients.build
+      @recipe.build_category
     end 
 
     def create 
@@ -22,10 +23,15 @@ class RecipesController < ApplicationController
     def show 
     end 
 
+    def update 
+      @recipe.update(recipe_params) 
+      redirect_to recipe_path(@recipe) 
+    end 
+
     private 
 
     def recipe_params 
-      params.require(:recipe).permit(:title, :image, ingredients_attributes: [:name, recipe_details: [:serves, :quantity, :level]])
+      params.require(:recipe).permit(:title, :image, :level, :serves, ingredients_attributes: [:name, recipe_details: [:quantity]])
     end 
 
     def set_recipe 
