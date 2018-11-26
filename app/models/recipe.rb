@@ -2,14 +2,12 @@ class Recipe < ApplicationRecord
   has_one_attached :image
   validate :image_type
   
-  belongs_to :category, optional: true
-
+  belongs_to :category
+  
   has_many :recipe_details 
   has_many :ingredients, through: :recipe_details
-  
-  validates :title, :serves, :level, presence: true
-  validates :title, uniqueness: true 
-  validates_associated :ingredients
+
+  validates :serves, :level, presence: true
   
   def thumbnail 
     return self.image.variant(resize: '350x350!').processed
@@ -19,14 +17,7 @@ class Recipe < ApplicationRecord
     return self.image.variant(resize: '1000x500!').processed
   end 
 
-  def ingredients_attributes=(ingredients_attributes) 
-    ingredients_attributes.values.each do |ingredients_attribute| 
-      if !ingredients_attribute["name"].empty?
-        ingredient = Ingredient.find_or_create_by(name: ingredients_attribute["name"])
-        self.recipe_details.build(recipe: self, ingredient: ingredient, quantity: ingredients_attribute["recipe_details"]["quantity"])
-      end      
-    end 
-  end  
+  
 
   private 
 

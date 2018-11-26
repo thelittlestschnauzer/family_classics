@@ -20,7 +20,7 @@
     <div class="navbar-end">
       <div class="navbar-item">
       <% if signed_in? %>
-        <%= link_to "Recipes", recipes_path, class: "navbar-item" %>
+        <%= link_to "Recipes", category_recipes_path, class: "navbar-item" %>
         <%= link_to "Logout", logout_path, class: "navbar-item" %>
         <% else %>
         <%= link_to "Sign Up", signup_path, class: "navbar-item" %>

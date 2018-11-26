@@ -8,4 +8,5 @@ class User < ApplicationRecord
   validates :name, :email, :password, presence: true 
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
   
+
 end

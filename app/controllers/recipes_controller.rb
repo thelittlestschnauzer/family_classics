@@ -1,45 +1,25 @@
 class RecipesController < ApplicationController
-    before_action :set_recipe, only: [:show, :edit, :update, :destroy]
     
-    def new 
-      @recipe = Recipe.new 
-      @recipe.ingredients.build
-      @recipe.build_category 
-    end 
+  def new
+    @category = Category.find(params[:category_id]) 
+    @recipe = @category.recipes.new
+  end 
 
-    def create 
-      @recipe = Recipe.create(recipe_params)
-      if @recipe.save 
-        redirect_to @recipe
-      else
-        render :new 
-      end 
-    end 
+  def create 
+    @category = Category.find(params[:category_id])
+    @recipe = @category.recipes.create(recipe_params)
 
-    def index 
-      @recipes = Recipe.with_attached_image
+    if @recipe.save 
+      redirect_to root_path 
+    else 
+      render :new 
     end 
-
-    def show 
-    end 
-
-    def update 
-      @recipe.update(recipe_params) 
-      redirect_to recipe_path(@recipe) 
-    end
+  end 
     
-    def destroy 
-      @recipe.destroy
-      redirect_to root_path
-    end 
-
     private 
 
-    def recipe_params 
-      params.require(:recipe).permit(:title, :image, :level, :serves, ingredients_attributes: [:name, recipe_details: [:quantity]])
+    def recipe_params
+      params.require(:recipe).permit(:title, :level, :serves, :image)
     end 
-
-    def set_recipe 
-      @recipe = Recipe.find(params[:id])
-    end 
+    
 end

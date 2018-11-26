@@ -1,55 +1,77 @@
   <%= render 'shared/errors', object: @recipe %>
 
-<%= form_for @recipe do |f| %>
-  
-  Select a Category for your recipe:
-
-  <div class="field">
-    <%= f.collection_select :category_id, Category.all, :id, :name %><br/> 
-  </div>
-
-  <div class="field">
-    <%= f.label :title_of_recipe, class: "label" %>
-    <%= f.text_field :title, class: "input" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :image, class: "label" %>
-    <%= f.file_field :image %>
-  </div>
-
-  <div class="field">
-    <%= f.label :level, class: "label" %>
-    <%= f.text_field :level, class: "input" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :serves, class: "label" %>
-    <%= f.text_field :serves, class: "input" %>
-  </div>
-
-<h3>Ingredients</h3>
-<div id="ingredients">
-  <div class="field">
-    <%= f.fields_for :ingredients do |ingredient| %>
-      <%= render 'ingredient_fields', f: ingredient %>
-    <% end %>
-    <%= link_to_add_association 'add ingredient', f, :ingredients, class: "button" %><br/>
-  </div>
-  <br>
-</div>
-  <h3>Quantity</h3>
-    <div id="recipe_details">
-      <div class="field">
-        <%= f.fields_for :recipe_details do |recipe_detail| %>
-          <%= render 'recipe_detail_fields', f: recipe_detail %>
-        <% end %>
-        <br>
-        <%= link_to_add_association 'add quantity', f, :recipe_details, class: "button" %>
+<%= form_for ([@category, @recipe]) do |f| %>
+ <div class="columns">
+    <div class="column is-5">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">Please pick a Category for your Recipe: </p>
+        </header>
+        <div class="card-content">
+          <div class="content">
+          <div class="field">
+            <%= f.collection_select :category_id, Category.all, :id, :name %>
+          </div>
+          <header class="card-header">
+            <p class="card-header-title">Title of Recipe: </p>
+          </header>
+          <div class="field">
+            <%= f.text_field :title, class: "input" %>
+          </div>
+          <header class="card-header">
+            <p class="card-header-title">Upload Image of Recipe</p>
+          </header>
+          <div class="field">
+            <%= f.file_field :image %>
+          </div>
+          <header class="card-header">
+            <p class="card-header-title">Level of Expertise:</p>
+          </header>
+            <div class="field">
+              <%= f.text_field :level, class: "input" %>
+            </div>
+            <header class="card-header">
+              <p class="card-header-title">Serves # of People:</p>
+            </header> 
+            <div class="field">
+              <%= f.text_field :serves, class: "input" %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  <br/>
-  <div class="field">
-    <%= f.submit class: "button active-button" %>
-  </div>
-<% end %>
+    <div class="column is-6">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">Ingredients:</p>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <div class="field">
+              <%= f.fields_for :ingredients do |i|%> 
+                <%= i.label :quantity_and_name, class: "label" %>
+                <%= i.text_field :name, class: "input" %>
+            </div>  
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">Directions:</p>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <div class="field">
+            <%= i.fields_for :recipe_details do |rd| %>
+              <%= rd.text_field :directions, class: "input" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+    </div>
+    <br>
+      <% end %>
+    <div class="actions">
+      <%= f.submit class: "button" %>
+    </div>
+    <% end %>
